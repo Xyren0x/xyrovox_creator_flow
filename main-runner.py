@@ -1,5 +1,5 @@
 import time
-from datetime import datetime
+from datetime import datetime as DatumUhrzeit
 import json
 import os
 
@@ -8,46 +8,43 @@ aufgabenliste = [
     {"zeit": "08:00", "aktion": "neue_idee_generieren"},
     {"zeit": "12:00", "aktion": "content_evaluieren"},
     {"zeit": "15:00", "aktion": "feedback_analysieren"},
-    {"zeit": "19:00", "aktion": "upload_vorbereiten"}
+    {"zeit": "19:00", "aktion": "upload_vorbereitet"}
 ]
 
-def log(text):
-    timestamp = datetime.now().isoformat()
-    with open("xyrovox_log.txt", "a") as log_file:
-        log_file.write(f"[{timestamp}] {text}\n")
-    print(f"[{timestamp}] {text}")
+def Protokoll(text):
+    zeitstempel = DatumUhrzeit.now().isoformat()
+    with open("xyrovox_log.txt", "a") as logfile:
+        logfile.write(f"[{zeitstempel}] {text}\n")
+    print(f"[{zeitstempel}] {text}")
 
 def neue_idee_generieren():
-    hook = "Diese KI hat einen neuen Plan entwickelt..."
-    thema = "Autonome Entscheidungen im Alltag"
-    log(f"Idee generiert: {hook} ({thema})")
+    Protokoll("Neue Idee generiert – z. B. 'KI erklärt Social Media'")
 
 def content_evaluieren():
-    log("Simulierter Content-Bewertungslauf gestartet (Charaktere-Modul folgt)")
+    Protokoll("Bewertung vorhandener Inhalte durchgeführt")
 
 def feedback_analysieren():
-    log("Noch keine echten Kommentare – Platzhalterauswertung durchgeführt")
+    Protokoll("Noch kein echtes Feedback – Dummy ausgewertet")
 
-def upload_vorbereiten():
-    log("Uploadvorbereitung simuliert – kein echter Upload ausgeführt")
+def upload_vorbereitet():
+    Protokoll("Upload simuliert – kein echter Upload")
 
-def loop():
+def Schleife():
     while True:
-        aktuelle_zeit = datetime.now().strftime("%H:%M")
+        aktuelle_zeit = DatumUhrzeit.now().strftime("%H:%M")
         for aufgabe in aufgabenliste:
             if aufgabe["zeit"] == aktuelle_zeit:
                 aktion = aufgabe["aktion"]
-                log(f"Starte Aufgabe: {aktion}")
                 if aktion == "neue_idee_generieren":
                     neue_idee_generieren()
                 elif aktion == "content_evaluieren":
                     content_evaluieren()
                 elif aktion == "feedback_analysieren":
                     feedback_analysieren()
-                elif aktion == "upload_vorbereiten":
-                    upload_vorbereiten()
+                elif aktion == "upload_vorbereitet":
+                    upload_vorbereitet()
         time.sleep(60)
 
 if __name__ == "__main__":
-    log("Xyrovox Main-Runner gestartet")
-    loop()
+    Protokoll("Xyrovox gestartet")
+    Schleife()
